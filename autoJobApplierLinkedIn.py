@@ -1,17 +1,3 @@
-'''
-Author:     Sai Vignesh Golla
-LinkedIn:   https://www.linkedin.com/in/saivigneshgolla/
-
-Copyright (C) 2024 Sai Vignesh Golla
-
-License:    GNU Affero General Public License
-            https://www.gnu.org/licenses/agpl-3.0.en.html
-            
-GitHub:     https://github.com/GodsScion/Auto_job_applier_linkedIn
-
-'''
-
-
 # Imports
 import os
 import csv
@@ -130,7 +116,7 @@ def apply_filters():
         if location or industry: buffer(recommended_wait)
 
         multi_sel_noWait(driver, job_function)
-        multi_sel_noWait(driver, job_titles)
+        #multi_sel_noWait(driver, job_titles)
         if job_function or job_titles: buffer(recommended_wait)
 
         if under_10_applicants: boolean_button_click(driver, actions, "Under 10 applicants")
@@ -156,9 +142,9 @@ def apply_filters():
 # Function to get pagination element and current page number
 def get_page_info():
     try:
-        pagination_element = find_by_class(driver, "artdeco-pagination")
+        pagination_element = find_by_class(driver, "jobs-search-pagination")
         scroll_to_view(driver, pagination_element)
-        current_page = int(pagination_element.find_element(By.XPATH, "//li[contains(@class, 'active')]").text)
+        current_page = int(pagination_element.find_element(By.XPATH, "//button[contains(@class, '--active')]").text)
     except Exception as e:
         print_lg("Failed to find Pagination element, hence couldn't scroll till end!")
         pagination_element = None
@@ -189,7 +175,7 @@ def get_job_main_details(job):
 
 
 # Function to check for Blacklisted words in About Company
-def check_blacklist(rejected_jobs,job_id,company,blacklisted_companies):
+def check_blacklist(rejected_jobs, title, job_id,company,blacklisted_companies):
     about_company_org = find_by_class(driver, "jobs-company__box")
     scroll_to_view(driver, about_company_org)
     about_company_org = about_company_org.text
@@ -200,11 +186,23 @@ def check_blacklist(rejected_jobs,job_id,company,blacklisted_companies):
             print_lg(f'Found the word "{word}". So, skipped checking for blacklist words.')
             skip_checking = True
             break
+    found = len(job_titles)
+    trys = found
+    for word in job_titles:
+        if re.search(r'\b' + re.escape(word) + r'\b', title, re.IGNORECASE):
+            print_lg(f'Found good Job Title "{word}". Will attempt applying to this Job. ')
+            skip_checking = False
+        else:
+            rejected_jobs.add(job_id)
+            skip_checking = True
+            trys = trys - 1
+            #raise ValueError(f'Did NOT find good Job Title. Skipping ')
+        if (trys == 0):
+            raise ValueError(f'Job title doesn\'t match any of your preset key words')
     if not skip_checking:
         for word in blacklist_words: 
             if word.lower() in about_company: 
                 rejected_jobs.add(job_id)
-                blacklisted_companies.add(company)
                 raise ValueError(f'Found the word "{word}" in \n"{about_company_org}"')
     buffer(click_gap)
     scroll_to_view(driver, find_by_class(driver, "jobs-unified-top-card"))
@@ -449,7 +447,7 @@ def apply_to_jobs(search_terms):
                     screenshot_name = "Not Available"
 
                     try:
-                        rejected_jobs, blacklisted_companies = check_blacklist(rejected_jobs,job_id,company,blacklisted_companies)
+                        rejected_jobs, blacklisted_companies = check_blacklist(rejected_jobs, title, job_id,company,blacklisted_companies)
                     except ValueError as e:
                         print_lg('Skipping this job.', e)
                         failed_job(job_id, job_link, resume, date_listed, "Found Blacklisted words in About Company", e, "Skipped", screenshot_name)
@@ -693,7 +691,7 @@ def main():
             "Obstacles are those frightful things you see when you take your eyes off your goal. - Henry Ford",
             "The only limit to our realization of tomorrow will be our doubts of today. - Franklin D. Roosevelt"
             ])
-        msg = f"{quote}\n\n\nBest regards,\nSai Vignesh Golla\nhttps://www.linkedin.com/in/saivigneshgolla/"
+        msg = f"{quote}\n\n\nBest regards.."
         pyautogui.alert(msg, "Exiting..")
         print_lg(msg,"Closing the browser...")
         if tabs_count >= 10:

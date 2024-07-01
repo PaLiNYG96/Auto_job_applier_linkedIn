@@ -90,8 +90,6 @@ def create_custom_resume(job_description):
     pass
 
 
-
-
 def resume_main():
     try:
         driver.get("https://chat.openai.com/")
@@ -103,8 +101,6 @@ def resume_main():
         open_resume_chat()
         print_lg("Resume Log In worked")
         
-        
-
     except Exception as e:
         print_lg(e)
         driver.quit()

@@ -4,9 +4,9 @@
 # >>>>>>>>>>> Global Settings <<<<<<<<<<<
 
 # Directory and name of the files where history of applied jobs is saved (Sentence after the last "/" will be considered as the file name).
-file_name = "./History/all_applied_applications_history.csv"
-failed_file_name = "./History//all_failed_applications_history.csv"
-logs_folder_path = "logs/"
+file_name = "./History-DICE/all_applied_applications_history.csv"
+failed_file_name = "./History-DICE//all_failed_applications_history.csv"
+logs_folder_path = "logs-DICE/"
 
 # Set the maximum amount of time allowed to wait between each click in secs
 click_gap = 3                   # Enter max allowed secs to wait approximately. (Only Non Negative Integers like 0,1,2,3,....)
@@ -35,7 +35,7 @@ username = "alsaid.mohammed@hotmail.com"
 password = "VapingMan0537"
 
 # These Sentences are Searched in LinkedIn
-search_terms = ["QA Automation", "Automation Engineer", "SDET", "QA Engineer", "QA"]
+search_terms = ["QA Engineer", "QA Automation", "Automation Engineer", "SDET", "QA"]
 # Do you want to randomize the search order for search_terms?
 randomize_search_order = True   # True of False
 
@@ -85,30 +85,26 @@ String_Preferences = ""
 Multiple_Select = []
 '''
 
-sort_by = "Most relevant"       # "Most recent", "Most relevant" or ("" to not select) 
-date_posted = "Past week"        # "Any time", "Past month", "Past week", "Past 24 hours" or ("" to not select)
-salary = ""                     # "$40,000+", "$60,000+", "$80,000+", "$100,000+", "$120,000+", "$140,000+", "$160,000+", "$180,000+", "$200,000+"
+#sort_by = "Most relevant"       # "Most recent", "Most relevant" or ("" to not select) 
+date_posted = "Last 7 Days"        # "Any Date", "Today", "Last 3 Days", "Last 7 Days" or ("" to not select)
+#salary = ""                     # "$40,000+", "$60,000+", "$80,000+", "$100,000+", "$120,000+", "$140,000+", "$160,000+", "$180,000+", "$200,000+"
 
-easy_apply_only = True         # True or False
+Employment_Type = []             # "FULLTIME", "PARTTIME", "CONTRACTS", "THIRD_PARTY", OR Leave Empty "" For no Selection (ALL)
+Easy_Apply_Only = True          # I PUT THIS HERE TO REMIND YOU THAT THIS PROGRAM ONLY WORKS ON EASY APPLY JOBS FOR NOW. (Changing value to False wont change anything)
+Work_Auth = False                # True for "Willing to Sponsor", False for no
+Employer_Type = []                   # (multiple select) "Direct Hire", "Recruiter", "Other"
+Work_Settings = ["Remote"]         # (multiple select) "On-Site", "Remote", "Hybrid"
 
-experience_level = []           # (multiple select) "Internship", "Entry level", "Associate", "Mid-Senior level", "Director", "Executive"
-job_type = []                   # (multiple select) "Full-time", "Part-time", "Contract", "Temporary", "Volunteer", "Internship", "Other"
-on_site = ["Remote"]                    # (multiple select) "On-site", "Remote", "Hybrid"
-
-companies = [
-     # "7-eleven", "Google","X, the moonshot factory","YouTube","CapitalG","Adometry (acquired by Google)","Meta","Apple","Byte Dance","Netflix",
-     # "Snowflake","Mineral.ai","Microsoft","JP Morgan","Barclays","Visa","American Express", "Snap Inc",
-]                  # (dynamic multiple select) "JPMorgan Chase & Co.", "Tata Consultancy Services", "Recruiting from Scratch", "Epic", "Elevance Health", and so on... make sure the name you type in list exactly matches with the company name you're looking for, including capitals.
-location = []                   # (dynamic multiple select) if remote, make that selection in on-site field above and leave this empty
-industry = []                   # (dynamic multiple select)
-job_function = []               # (dynamic multiple select)
+#location = []                   # (dynamic multiple select) if remote, make that selection in on-site field above and leave this empty
+#industry = []                   # (dynamic multiple select)
+#job_function = []               # (dynamic multiple select)
 job_titles = ["QA Automation", "Quality Engineer", "Test Lead", "Automation QA", "Automation Engineer", "SDET", "in Test", "QA Engineer", "Software Automation Engineer", "Software Developer in Test", "Quality Assurance", "Quality manager", "QA Test Manager"] # (dynamic multiple select)
-benefits = []                   # (dynamic multiple select)
-commitments = []                # (dynamic multiple select)
+#benefits = []                   # (dynamic multiple select)
+#commitments = []                # (dynamic multiple select)
 
-under_10_applicants = False     # True or False
-in_your_network = False         # True or False
-fair_chance_employer = False    # True or False
+#under_10_applicants = False     # True or False
+#in_your_network = False         # True or False
+#fair_chance_employer = False    # True or False
 
 
 
@@ -155,22 +151,9 @@ connect_request_message = ""    # Leave Empty to send connection request without
 
 # Do you want the program to run continuously until you stop it? (Beta)
 run_non_stop = True             # True or False ,   Will be treated as False if run_in_background is True
-alternate_sortby = True         # True or False
-cycle_date_posted = True        # True or False
 stop_date_cycle_at_24hr = True  # True or False
 ##
 
-
-# ----------------------------------------------  RESUME GENERATOR (Experimental)  ---------------------------------------------- #
-
-# Login Credentials for ChatGPT
-chatGPT_username = "username@example.com"
-chatGPT_password = "examplepassword"
-
-chatGPT_resume_chat_title = "Resume review and feedback."
-
-# Give the path to the folder where all the generated resumes are to be stored
-generated_resume_path = "all resumes/"
 
 
 
